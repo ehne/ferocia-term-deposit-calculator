@@ -21,3 +21,4 @@ Tests are located in the `/test/` folder, and a TypeScript check is done before 
 ## Design decisions
 
 - The main function to calculate interest should work using the smallest unit (months), and things need to be converted into that scale beforehand.
+- Interest calculating functions round to the nearest whole number (integer), as they are being used for a simple user-facing presentation.
