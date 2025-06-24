@@ -15,13 +15,19 @@ It can also be executed by running `pnpm format`.
 The term deposit calculator tool is provided as a command-line interface (CLI).
 See the design decision notes below for more info as to why a CLI was chosen over something more graphical.
 
-After having set up the repository using the process above, you can use the CLI by running:
+After having set up the repository using the process above, you can use the CLI by running `pnpm start --help` to see help page with the available options.
+
+Example usage:
 
 ```bash
-pnpm start --help
+pnpm start --starting-balance=10000 --investment-term=12 --interest-rate=1.1 --interest-paid=AT_MATURITY
 ```
 
-to see all the options that are available.
+- `starting-balance` is how much money you want to invest
+- `interest-rate` is the per-anum interest rate.
+- `investment-term` is the number of months you wish for your money to be invested for.
+- `interest-paid` is when you want interest to be paid on your investment (see the `pnpm start --help` output for the available options).
+
 
 ## Testing
 
