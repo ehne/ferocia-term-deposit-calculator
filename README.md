@@ -5,6 +5,7 @@ A term deposit calculator (take home coding task for Ferocia). There'll be code 
 ## Set-up
 
 This project uses [pnpm](https://pnpm.io) as its package manager.
+Make sure you've first cloned the repository locally.
 To install the required libraries, run `pnpm install` from the command-line in the same directory the `package.json` file.
 
 Code is formatted with [Prettier](https://prettier.io/), which installed via the set-up above, and can be configured to run on save in your IDE.
