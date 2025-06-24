@@ -11,6 +11,10 @@ To install the required libraries, run `pnpm install` from the command-line in t
 Code is formatted with [Prettier](https://prettier.io/), which installed via the set-up above, and can be configured to run on save in your IDE.
 It can also be executed by running `pnpm format`.
 
+All code for the interest calculating and the cli is under `./src/`.
+`./src/cli.ts` contains the script that runs when you run `pnpm start`.
+`./test/` is where the tests are located (see below for more info on testing).
+
 ## Running the command-line interface
 
 The term deposit calculator tool is provided as a command-line interface (CLI).
