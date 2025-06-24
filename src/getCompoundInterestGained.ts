@@ -27,5 +27,13 @@ export const getCompoundInterestGained = (
 
     return Math.round(finalBalance - startingBalance);
   }
+
+  if (interestPayFrequency === InterestPayFrequency.QUARTERLY) {
+    const finalBalance =
+      startingBalance *
+      Math.pow(1 + monthlyInterestRate * 3.0, monthsInvested / 3.0);
+
+    return Math.round(finalBalance - startingBalance);
+  }
   return 0;
 };
