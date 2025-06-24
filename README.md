@@ -46,6 +46,13 @@ Tests are located in the `/test/` folder, and a TypeScript check is done before 
 - `getCompoundInterestGained` should throw an error if it is passed data that it cannot work with (eg. if the amount of time money is invest is smaller than the interest payment frequency would allow for)
 - The tool is provided as a command-line interface because implementing a graphical user interface would involve creating (and testing) a lot more glue and components than the 2 hour time limit would allow for.
   - A GUI could be added in future though.
+- The functions to figure out how much interest is gained should not worry about how they'll show up in the CLI. This is so they're generic, and can be used in other situations.
+
+### Interest calculations
+Interest is calculated using the formulas found on the following websites:
+
+- Compound interest: https://moneysmart.gov.au/saving/compound-interest
+- Simple interest: https://www.calculator.net/simple-interest-calculator.html
 
 ## Further tasks
 - It would be good to validate the input that the user provides to the system to ensure it is within normal bounds for a _customer_ tool (eg. no investment periods of 4000 years or negative interest rates)
