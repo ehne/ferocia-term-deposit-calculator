@@ -20,7 +20,8 @@ Tests are located in the `/test/` folder, and a TypeScript check is done before 
 
 ## Design decisions
 
-- The main function to calculate interest should work using the smallest unit (months), and things need to be converted into that scale beforehand.
+- The main functions to calculate interest should work using the smallest unit (months), and things need to be converted into that scale beforehand.
 - Interest calculating functions round to the nearest whole number (integer), as they are being used for a simple user-facing presentation.
   - From the perspective of the end-user, this tool is to provide an overview of how their money may grow if they choose to use different strategies with a term deposit.
   - If this code was to be used by business logic to determine how much interest to add to someone's real account, then it should not round the numbers to the nearest dollar (instead rounding to the nearest cent).
+- `getCompoundInterestGained` should throw an error if it is passed data that it cannot work with (eg. if the amount of time money is invest is smaller than the interest payment frequency would allow for)
