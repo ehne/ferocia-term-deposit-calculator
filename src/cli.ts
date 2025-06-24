@@ -15,6 +15,7 @@ const interestPaidOptions = [
 // parse CLI arguments
 const args = yargs()
   .scriptName("term-deposit-calculator")
+  .usage("$0", "A command-line tool to calculate term deposit investments")
   .demandOption([
     "investment-term",
     "interest-rate",
