@@ -20,9 +20,9 @@ All code for the interest calculating and the cli is under `./src/`.
 The term deposit calculator tool is provided as a command-line interface (CLI).
 See the design decision notes below for more info as to why a CLI was chosen over something more graphical.
 
-After having set up the repository using the process above, you can use the CLI by running `pnpm start --help` to see help page with the available options.
+After having set up the repository using the process above, you can use the CLI by running `pnpm start --help` to see the help page with the available options for the CLI.
 
-Example usage:
+Example usage with real values for demonstration purposes:
 
 ```bash
 pnpm start --starting-balance=10000 --investment-term=12 --interest-rate=1.1 --interest-paid=AT_MATURITY
@@ -51,7 +51,7 @@ Tests are located in the `/test/` folder, and a TypeScript check is done before 
 - `getCompoundInterestGained` should throw an error if it is passed data that it cannot work with (eg. if the amount of time money is invest is smaller than the interest payment frequency would allow for)
 - The tool is provided as a command-line interface because implementing a graphical user interface would involve creating (and testing) a lot more glue and components than the 2 hour time limit would allow for.
   - A GUI could be added in future though.
-- The functions to figure out how much interest is gained should not worry about how they'll show up in the CLI. This is so they're generic, and can be used in other situations.
+- The functions to figure out how much interest is gained should not worry about parsing information from the CLI, and should have data converted to work in their requirements first.
 
 ### Interest calculations
 Interest is calculated using the formulas found on the following websites:
