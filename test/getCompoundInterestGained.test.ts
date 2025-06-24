@@ -78,15 +78,32 @@ describe("compound interest gained calculation works for 'normal' inputs", () =>
 });
 
 describe("getCompoundInterestGained throws an error when interest pay frequency is less than investment time", () => {
-  test("interest paid monthly should only throw error with investment period of 0", () => {
-    expect(() =>
-      getCompoundInterestGained(
-        1000,
-        0.011 / 12.0,
-        // investment period of 0.
-        0,
-        InterestPayFrequency.MONTHLY,
-      ),
-    ).toThrow();
-  });
+  test.each([
+    // [label (for the test visualiser), months invested, interest pay frequency]
+    ["monthly", 0, InterestPayFrequency.MONTHLY],
+    ["monthly", -10, InterestPayFrequency.MONTHLY],
+
+    ["quarterly", 0, InterestPayFrequency.QUARTERLY],
+    ["quarterly", 2, InterestPayFrequency.QUARTERLY],
+    ["quarterly", -10, InterestPayFrequency.QUARTERLY],
+
+    ["annually", 0, InterestPayFrequency.ANNUALLY],
+    ["annually", 2, InterestPayFrequency.ANNUALLY],
+    ["annually", 7, InterestPayFrequency.ANNUALLY],
+    ["annually", -10, InterestPayFrequency.ANNUALLY],
+  ])(
+    "interest paid %s throws error with months invested: %i",
+    (_, monthsInvested, payFrequency) => {
+      expect(() =>
+        getCompoundInterestGained(
+          // arbitrary values for starting balance and interest rate,
+          // as that's not what we're interested in with this test.
+          1000,
+          0.011 / 12.0,
+          monthsInvested,
+          payFrequency,
+        ),
+      ).toThrow();
+    },
+  );
 });
