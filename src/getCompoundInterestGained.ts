@@ -21,19 +21,23 @@ export const getCompoundInterestGained = (
   monthsInvested: number,
   interestPayFrequency: InterestPayFrequency,
 ): number => {
-  if (interestPayFrequency === InterestPayFrequency.MONTHLY) {
-    const finalBalance =
-      startingBalance * Math.pow(1 + monthlyInterestRate, monthsInvested);
+  // get how many months there are per the interest pay frequency.
+  const monthsPerInterestPayPeriod = {
+    [InterestPayFrequency.MONTHLY]: 1,
+    [InterestPayFrequency.QUARTERLY]: 3,
+    [InterestPayFrequency.ANNUALLY]: 12,
+  }[interestPayFrequency];
 
-    return Math.round(finalBalance - startingBalance);
-  }
+  // calculate final balance after compound interest is applied over the time period.
+  const finalBalance =
+    startingBalance *
+    Math.pow(
+      1 + monthlyInterestRate * monthsPerInterestPayPeriod,
+      monthsInvested / monthsPerInterestPayPeriod,
+    );
 
-  if (interestPayFrequency === InterestPayFrequency.QUARTERLY) {
-    const finalBalance =
-      startingBalance *
-      Math.pow(1 + monthlyInterestRate * 3.0, monthsInvested / 3.0);
-
-    return Math.round(finalBalance - startingBalance);
-  }
-  return 0;
+  // calculate interest gained and round the result before returning it
+  // (because this is used in a simple user-facing tool, returning decimals are not relevant from the user's perspective)
+  const interestGained = finalBalance - startingBalance;
+  return Math.round(interestGained);
 };
