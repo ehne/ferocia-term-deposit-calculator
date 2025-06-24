@@ -76,3 +76,17 @@ describe("compound interest gained calculation works for 'normal' inputs", () =>
     },
   );
 });
+
+describe("getCompoundInterestGained throws an error when interest pay frequency is less than investment time", () => {
+  test("interest paid monthly should only throw error with investment period of 0", () => {
+    expect(() =>
+      getCompoundInterestGained(
+        1000,
+        0.011 / 12.0,
+        // investment period of 0.
+        0,
+        InterestPayFrequency.MONTHLY,
+      ),
+    ).toThrow();
+  });
+});
