@@ -1,6 +1,6 @@
 # Term deposit calculator
 
-A term deposit calculator (take home coding task for Ferocia). There'll be code here soon.
+A term deposit calculator CLI tool.
 
 ## Set-up
 
