@@ -1,12 +1,18 @@
 import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
-import { InterestPayFrequency } from "../src/getCompoundInterestGained";
+import {
+  getCompoundInterestGained,
+  InterestPayFrequency,
+} from "../src/getCompoundInterestGained";
+import { getSimpleInterestGained } from "../src/getSimpleInterestGained";
 
+// create a list of all the options for "interest-paid" in the CLI
 const interestPaidOptions = [
   ...Object.keys(InterestPayFrequency).filter((x) => isNaN(Number(x))),
   "AT_MATURITY",
 ];
 
+// parse CLI arguments
 const args = yargs()
   .scriptName("term-deposit-calculator")
   .demandOption([
@@ -29,4 +35,30 @@ const args = yargs()
   .help()
   .parseSync(hideBin(process.argv));
 
-console.log(args);
+// convert yearly interest rate into monthly.
+const monthlyInterestRate = args.interestRate / 100.0 / 12.0;
+
+// calculate how much interest is gained
+let interestGained = 0;
+if (args.interestPaid === "AT_MATURITY") {
+  interestGained = getSimpleInterestGained(
+    args.startingBalance,
+    monthlyInterestRate,
+    args.investmentTerm,
+  );
+} else {
+  interestGained = getCompoundInterestGained(
+    args.startingBalance,
+    monthlyInterestRate,
+    args.investmentTerm,
+    InterestPayFrequency[args.interestPaid],
+  );
+}
+
+// display the resulting information to the user.
+console.log(`
+Starting balance: \$${args.startingBalance}
+Interest gained: \$${interestGained}
+
+Final balance: \$${args.startingBalance + interestGained}
+`);
