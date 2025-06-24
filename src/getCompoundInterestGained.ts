@@ -28,6 +28,13 @@ export const getCompoundInterestGained = (
     [InterestPayFrequency.ANNUALLY]: 12,
   }[interestPayFrequency];
 
+  // ensure that it is possible to actually pay interest with the frequency chosen given how long the money is invested for.
+  if (monthsInvested < monthsPerInterestPayPeriod) {
+    throw Error(
+      `Cannot calculate compound interest: Cannot pay interest every ${monthsPerInterestPayPeriod} month(s) when money is invested for only ${monthsInvested} month(s)`,
+    );
+  }
+
   // calculate final balance after compound interest is applied over the time period.
   const finalBalance =
     startingBalance *
