@@ -34,6 +34,7 @@ describe("compound interest gained calculation works for 'normal' inputs", () =>
     // [starting balance, interest rate per-anum, months invested, expected gain]
     [10000, 0.011, 12, 110],
     [1000, 0.0245, 12 * 5, 130],
+    [1000, 0.0245, 7, 14],
     [54321, 0.011, 3, 149],
     [0, 0.011, 12, 0],
     [54321, 0, 12, 0],
